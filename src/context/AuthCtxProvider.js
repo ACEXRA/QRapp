@@ -6,6 +6,7 @@ export const AuthCtx = React.createContext();
 const AuthCtxProvider = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState();
+
   const naviagate = useNavigate();
   const login = () => setAuthenticated(true);
 
@@ -15,7 +16,15 @@ const AuthCtxProvider = ({ children }) => {
   };
 
   return (
-    <AuthCtx.Provider value={{ authenticated, login, logout, user, setUser }}>
+    <AuthCtx.Provider
+      value={{
+        authenticated,
+        login,
+        logout,
+        user,
+        setUser,
+      }}
+    >
       {children}
     </AuthCtx.Provider>
   );

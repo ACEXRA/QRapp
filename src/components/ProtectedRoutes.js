@@ -7,7 +7,7 @@ const ProtectedRoutes = ({ allowedRoles }) => {
   const location = useLocation();
 
   if (!authenticated && !allowedRoles.includes(user?.role)) {
-    return <Navigate to="/unauthorized" state={{ from: location }} replace />;
+    return <Navigate to="*" state={{ from: location }} replace />;
   }
 
   return <Outlet />;

@@ -1,20 +1,17 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import Webcam from "react-webcam";
 import jsQR from "jsqr";
 
-const QrScanner = () => {
+const QrScanner = ({ onScan }) => {
   const webcamRef = useRef(null);
-  const [qrData, setQrData] = useState(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      scanQRCode();
-    }, 1000); // Scan every second
+  // Video constraints to use the back camera
+  const videoConstraints = {
+    facingMode: { exact: "environment" }, // Forces back camera
+  };
 
-    return () => clearInterval(interval);
-  }, []);
-
-  const scanQRCode = async () => {
+  // Memoize scanQRCode to prevent unnecessary re-renders
+  const scanQRCode = useCallback(() => {
     if (webcamRef.current) {
       const video = webcamRef.current.video;
       if (video.readyState === video.HAVE_ENOUGH_DATA) {
@@ -31,17 +28,21 @@ const QrScanner = () => {
         );
         const code = jsQR(imageData.data, imageData.width, imageData.height);
         if (code) {
-          setQrData(code.data);
+          onScan(code.data); // Pass QR data to parent
         }
       }
     }
-  };
+  }, [onScan]); // Dependency array includes onScan
+
+  useEffect(() => {
+    const interval = setInterval(scanQRCode, 1000); // Scan every second
+    return () => clearInterval(interval);
+  }, [scanQRCode]); // Now scanQRCode is properly included
 
   return (
     <div>
       <h2>QR Code Scanner</h2>
       <Webcam ref={webcamRef} width={300} height={300} />
-      {qrData && <p>Scanned QR Code: {qrData}</p>}
     </div>
   );
 };

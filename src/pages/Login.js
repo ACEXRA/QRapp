@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Button from "../components/Button";
 import { AuthCtx } from "../context/AuthCtxProvider";
 import { useNavigate } from "react-router-dom";
-import { loginHandler } from "../services/LoginService";
+import { loginHandler } from "../services/MockServer";
 
 const Login = () => {
   const { login, setUser } = useContext(AuthCtx);
