@@ -42,7 +42,12 @@ const QrScanner = ({ onScan }) => {
   return (
     <div>
       <h2>QR Code Scanner</h2>
-      <Webcam ref={webcamRef} width={300} height={300} />
+      <Webcam
+        ref={webcamRef}
+        width={300}
+        height={300}
+        videoConstraints={videoConstraints}
+      />
     </div>
   );
 };
