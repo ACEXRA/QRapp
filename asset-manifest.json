@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/qrapp/static/css/main.266a71b2.css",
+    "main.js": "/qrapp/static/js/main.f5654df2.js",
+    "index.html": "/qrapp/index.html",
+    "main.266a71b2.css.map": "/qrapp/static/css/main.266a71b2.css.map",
+    "main.f5654df2.js.map": "/qrapp/static/js/main.f5654df2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.266a71b2.css",
+    "static/js/main.f5654df2.js"
+  ]
+}
