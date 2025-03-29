@@ -11,7 +11,13 @@ const Employee = () => {
   useEffect(() => {
     setData(employeeMockService(user));
   }, [user]);
-  return <QRCodeCanvas value={data} />;
+  return (
+    <div>
+      <h1>QR code</h1>
+      <br />
+      <QRCodeCanvas value={data} />
+    </div>
+  );
 };
 
 export default Employee;

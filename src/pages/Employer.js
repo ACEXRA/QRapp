@@ -6,11 +6,7 @@ const Employer = () => {
   const onScan = (data) => {
     console.log(decryptData(data));
   };
-  return (
-    <div>
-      <QrScanner onScan={onScan} />
-    </div>
-  );
+  return <QrScanner onScan={onScan} />;
 };
 
 export default Employer;

@@ -12,9 +12,12 @@ code {
     monospace;
 }
 
+h1 {
+  margin: 0;
+}
+
 .app {
-  /* height: 100vh;
-  width: 100vw; */
+  height: calc(100vh - 80px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,6 +30,8 @@ code {
   justify-content: center;
   padding: 1rem;
   border-radius: 1rem;
+  width: 100%;
+  margin: 0 2rem;
 }
 
 .form-btn {
@@ -34,7 +39,32 @@ code {
   justify-content: end;
 }
 
+.form_grp {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
 .btn {
   width: 5rem;
+  height: 2rem;
   background-color: blue;
+  border-radius: 0.5rem;
+  border: none;
+  outline: 0;
+}
+
+.navbar {
+  background-color: #b3b3b3;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 80px;
+  align-items: center;
+}
+
+.qrscanner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

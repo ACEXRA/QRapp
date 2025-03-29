@@ -1,25 +1,31 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import Webcam from "react-webcam";
 import jsQR from "jsqr";
 
 const QrScanner = ({ onScan }) => {
+  const FACING_MODE_USER = "user";
+  const FACING_MODE_ENVIRONMENT = "environment";
   const webcamRef = useRef(null);
+  const [facingMode, setFacingMode] = useState(FACING_MODE_USER);
 
-  // Video constraints to use the back camera
-  const videoConstraints = {
-    facingMode: { exact: "environment" }, // Forces back camera
-  };
+  const handleClick = useCallback(() => {
+    setFacingMode((prevMode) =>
+      prevMode === FACING_MODE_USER ? FACING_MODE_ENVIRONMENT : FACING_MODE_USER
+    );
+  }, []);
 
-  // Memoize scanQRCode to prevent unnecessary re-renders
   const scanQRCode = useCallback(() => {
     if (webcamRef.current) {
       const video = webcamRef.current.video;
-      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+
+      // ✅ Ensure video is fully loaded
+      if (video.readyState === video.HAVE_ENOUGH_DATA && video.videoWidth > 0) {
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
         const imageData = context.getImageData(
           0,
           0,
@@ -27,26 +33,28 @@ const QrScanner = ({ onScan }) => {
           canvas.height
         );
         const code = jsQR(imageData.data, imageData.width, imageData.height);
+
         if (code) {
-          onScan(code.data); // Pass QR data to parent
+          onScan(code.data);
         }
       }
     }
-  }, [onScan]); // Dependency array includes onScan
+  }, [onScan]);
 
   useEffect(() => {
-    const interval = setInterval(scanQRCode, 1000); // Scan every second
+    const interval = setInterval(scanQRCode, 1000);
     return () => clearInterval(interval);
-  }, [scanQRCode]); // Now scanQRCode is properly included
+  }, [scanQRCode]); // ✅ Added missing dependency
 
   return (
-    <div>
+    <div className="qrscanner">
       <h2>QR Code Scanner</h2>
+      <button onClick={handleClick}>Switch Camera</button>
       <Webcam
         ref={webcamRef}
         width={300}
         height={300}
-        videoConstraints={videoConstraints}
+        videoConstraints={{ facingMode }}
       />
     </div>
   );

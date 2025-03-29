@@ -3,10 +3,11 @@ import { AuthCtx } from "../context/AuthCtxProvider";
 import Button from "./Button";
 
 const Navbar = () => {
-  const { logout } = useContext(AuthCtx);
+  const { logout, authenticated } = useContext(AuthCtx);
   return (
-    <nav>
-      <Button name={"Logout"} clickhandler={logout} />
+    <nav className="navbar">
+      <h1>Sportzz</h1>
+      {authenticated && <Button name={"Logout"} clickhandler={logout} />}
     </nav>
   );
 };

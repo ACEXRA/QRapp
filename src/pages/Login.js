@@ -28,11 +28,11 @@ const Login = () => {
   return (
     <form className="form" onSubmit={handler}>
       <h3>Login</h3>
-      <div>
+      <div className="form_grp">
         <label>Username</label>
         <input type="text" onChange={(e) => setName(e.target.value)} />
       </div>
-      <div>
+      <div className="form_grp">
         <label>Password</label>
         <input type="password" onChange={(e) => setPassword(e.target.value)} />
       </div>
