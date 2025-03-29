@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/qrapp/static/css/main.266a71b2.css",
-    "main.js": "/qrapp/static/js/main.f5654df2.js",
-    "index.html": "/qrapp/index.html",
-    "main.266a71b2.css.map": "/qrapp/static/css/main.266a71b2.css.map",
-    "main.f5654df2.js.map": "/qrapp/static/js/main.f5654df2.js.map"
+    "main.css": "/QRapp/static/css/main.266a71b2.css",
+    "main.js": "/QRapp/static/js/main.f5654df2.js",
+    "index.html": "/QRapp/index.html",
+    "main.266a71b2.css.map": "/QRapp/static/css/main.266a71b2.css.map",
+    "main.f5654df2.js.map": "/QRapp/static/js/main.f5654df2.js.map"
   },
   "entrypoints": [
     "static/css/main.266a71b2.css",
